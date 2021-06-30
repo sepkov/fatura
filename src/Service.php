@@ -1,8 +1,10 @@
-<?php namespace AAD\Fatura;
+<?php
+
+namespace AAD\Fatura;
 
 use AAD\Fatura\Exceptions\UnexpectedValueException;
 use NumberToWords\NumberToWords;
-use Rhumsaa\Uuid\Uuid;
+use Ramsey\Uuid\Uuid;
 
 class Service
 {
@@ -28,7 +30,7 @@ class Service
     ];
 
     const COMMANDS = [
-        "create_draft_invoice"                  => ["EARSIV_PORTAL_FATURA_OLUSTUR","RG_BASITFATURA"],
+        "create_draft_invoice"                  => ["EARSIV_PORTAL_FATURA_OLUSTUR", "RG_BASITFATURA"],
         "get_all_invoices_by_date_range"        => ["EARSIV_PORTAL_TASLAKLARI_GETIR", "RG_BASITTASLAKLAR"],
         "sign_draft_invoice"                    => ["EARSIV_PORTAL_FATURA_HSM_CIHAZI_ILE_IMZALA", "RG_BASITTASLAKLAR"],
         "get_invoice_html"                      => ["EARSIV_PORTAL_FATURA_GOSTER", "RG_BASITTASLAKLAR"],
@@ -205,7 +207,7 @@ class Service
                 "vergininKdvTutari" => "0"
             ];
         }
-      
+
         $invoice = $this->runCommand(
             self::COMMANDS['create_draft_invoice'][0],
             self::COMMANDS['create_draft_invoice'][1],
@@ -298,8 +300,8 @@ class Service
         }
 
         return [
-          'uuid' => $draft_invoice['uuid'],
-          'signed' => $sign
+            'uuid' => $draft_invoice['uuid'],
+            'signed' => $sign
         ];
     }
 
@@ -325,7 +327,7 @@ class Service
                 'aciklama' => $reason
             ]
         );
-        
+
         return $cancel['data'];
     }
 
@@ -440,7 +442,7 @@ class Service
         if (count($update_data) < 1) {
             return;
         }
-        
+
         $user = $this->runCommand(
             self::COMMANDS['update_user_data'][0],
             self::COMMANDS['update_user_data'][1],
